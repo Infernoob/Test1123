@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Random Name Picker</title>
+<meta name="description" content="Submit a list of names, then click to spin the wheel to choose one at random! Save your lists and embed them in your website or blog!" />
+<meta name="keywords" content="random,name,word,picker,wheel,fortune,fruit,machine" />
+<meta name="author" content="Russel Tarr">
+<meta property="og:author" content="Russel Tarr"/>
+<link rel="author" href="https://plus.google.com/103640547989049324091"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1" />
+
+<script type='text/javascript' src='jquery.js'></script>
+<script src="jquery.easing.1.3.js" type="text/javascript"></script>  
+<script type="text/javascript" src="save.js"></script>
+<script type="text/javascript" src="apprise/min.js"></script>
+<link rel="stylesheet" href="apprise/style.css" type="text/css" />
+<link rel="stylesheet" href="style-curtains.css" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet' type='text/css'>
+<style type="text/css" media="screen">
+#wellDone{font-family: 'Rye', cursive;}
+body, html{text-rendering: auto;font-family:Verdana, Geneva, sans-serif;margin: 0 auto;}
+.editit a:link,.editit a:visited,.editit a:active{color:white;text-decoration:none;}
+h1 {color: rgb(200,200,200);}
+h2{font-family: 'Rye', cursive;}
+h3 {text-shadow: 0.5px 1px 1px #88D;}
+</style>
+<script>
+
+createdByPremiumUser=0;
+authorType='viewExisting';loadedData="\u0441\u043e\u043b\u043d\u0446\u0435 \u0441\u0432\u0435\u0442\u0438\u0442 8 \u0447\u0430\u0441\u043e\u0432 \u0432 \u0434\u0435\u043d\u044c\n\u0433\u0440\u043e\u0437\u0430 \u043d\u043e\u0447\u044c\u044e\n\u0442\u0443\u043c\u0430\u043d \u043f\u043e \u0443\u0442\u0440\u0430\u043c\n\u0441\u043d\u0435\u0433 \u0432 \u0433\u043e\u0440\u0430\u0445\n\u0441\u0435\u0432\u0435\u0440\u043d\u043e\u0435 \u0441\u0438\u044f\u043d\u0438\u0435\n\u043e\u0442\u043b\u0438\u0447\u043d\u0430\u044f \u043f\u043e\u0433\u043e\u0434\u0430\n\u0437\u0430\u0432\u0442\u0440\u0430 \u0431\u0443\u0434\u0435\u0442 \u0445\u043e\u043b\u043e\u0434\u043d\u043e\n\u043f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430 \u0431\u0443\u0434\u0435\u0442 \u0434\u043e\u0436\u0434\u044c\n\u043d\u0430 \u043e\u0437\u0435\u0440\u0435 \u0431\u0443\u0434\u0435\u0442 \u0441\u0438\u043b\u044c\u043d\u044b\u0439 \u0432\u0435\u0442\u0435\u0440\n\u0441\u043a\u043e\u0440\u043e \u0431\u0443\u0434\u0435\u0442 \u0436\u0430\u0440\u043a\u043e\n\u043e\u0431\u043b\u0430\u0447\u043d\u043e, \u043d\u043e \u0441\u043e\u043b\u043d\u0435\u0447\u043d\u043e\n\u0431\u0443\u0434\u0435\u0442 \u0434\u0443\u0448\u043d\u043e \u0438 \u043f\u0440\u043e\u0445\u043b\u0430\u0434\u043d\u043e\n\u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u0445\u043e\u043b\u043e\u0434\u0430\u0442\u044c";theFile="3aCcBD";theFolder="14";
+</script>
+<script src="functions.js" type="text/javascript"></script>  
+</head>
+
+
+
+
+
+
+<body onload="init();toggle(2000)">
+
+
+
+<style>
+
+html,body
+{
+margin: 0px;
+}
+
+.small
+{
+font-size:x-small;	
+}
+
+#loginBox
+{
+position:absolute;
+z-index:10;
+top:0px;
+left:10px;	
+color:black;
+}
+
+#login a:link {color:white;text-decoration:none; font-size:small;}
+#login a:active{color:white;text-decoration:none}
+#login a:visited{color:white;text-decoration:none}
+#login
+{
+font-family:Verdana, Geneva, sans-serif;
+z-index:9999;
+font-size:small;
+position:fixed;
+top:0px;
+left:0px;
+width:100%;
+text-align:left;
+margin:0px;
+background-color:#44619d;
+text-decoration:none;
+}
+</style>
+
+<script>
+fbtemplate=0;
+premiumUser=0;
+premiumUserName="";
+premiumUserPW="";
+function showFields()
+	{
+	t=$("#login").css("top");
+	z=$("#loginBox").css("top")
+	console.log("TOP POS = "+t+" "+z);
+	if(t=="auto"){console.log(1);$("#loginBox").css("top","-75px");}
+	z=t=$("#loginBox").css("top")
+	console.log("TOP POS = "+t+" "+z);
+	document.getElementById("login").style.display="block";
+	document.getElementById("loginFields").style.display="block"
+	}
+
+function hideFields()
+{
+	document.getElementById("loginFields").style.display="none"
+}
+
+function showLoginDetails()
+{
+document.getElementById("loginBtn").style.display="none"
+document.getElementById("loggedIn").innerHTML="<a href='#'>Logged in as "+	premiumUserName +"</a> | <a href='javascript:logout()'>Logout</a> | <a target='_blank' href='//www.classtools.net'>Home</a> | <a target='_blank' href='//www.classtools.net/fform.php'>Contact</a> |  <a target='_blank' href='//www.classtools.net/_SEARCH/index.php'>PowerSearch</a> | ";
+if(typeof savethefave == 'function') 
+	{document.getElementById("loggedIn").innerHTML+="<span id='favBar'><a href='javascript:savethefave()'>Add to Favourites</a> | </span>";}
+//IMPORTANT NOTE: "savethefave" belongs in the PARENT page, so can be customised in terms of specifying title / location of widget. This function in turn calls savefave() on THIS page.
+if(typeof removAds == 'function') {removAds()}
+document.getElementById("loggedIn").innerHTML+="<a href='javascript:viewfavs()'>View Favourites</a> | ";
+document.getElementById("loggedIn").innerHTML+='<a target="_blank" href="//www.classtools.net/templates/_ac.php">Account Status</a> | '
+document.getElementById("loggedIn").style.display="block"
+
+if(fbtemplate==1)
+	{
+	$('body').css({"padding":"20px 0 0 0"});
+	$('fixeddiv').css({"top":"5px"});
+	$("#loginDiv").hide();
+	$("#login").show();
+	}
+}
+
+
+
+function logout()
+{
+$.ajax({ url: '//www.classtools.net/templates/_logout.php',
+			dataType: 'json',
+			type: 'post',
+			async:false,//wait for response before doing something
+			success: function(data) 
+				{
+				document.getElementById("loginBtn").style.display="block"
+				document.getElementById("loggedIn").style.display="none"
+				premiumUser=0;
+                }
+			});	
+	
+}
+
+
+function viewfavs()
+{self.location="//www.classtools.net/classtools_premium/user_templates.php?"+premiumUserName}
+
+function saveFave(theLoc,theTitle)
+{
+	
+	temp=self.location+""
+	$.ajax({ url: '//www.classtools.net/classtools_premium/add_template_to_user_profile.php',
+			 data: {
+					widgetLoc:theLoc,
+					premTitle:theTitle
+			 		},
+			dataType: 'json',
+			type: 'post',
+			success: function(data) 
+				{
+				alert(data.theResult)
+                }
+			});
+
+}
+
+function doLoginNow()
+{
+subUsr=document.getElementById("username").value;
+subPw=document.getElementById("thepw").value;
+doLogin(subUsr,subPw)
+}
+
+function doLogin(subUsr,subPw)//can be called from above, or from the icons.swf 
+{
+	$.ajax({ url: '//www.classtools.net/templates/_login_manual.php',
+			 data: {
+					submUsr:subUsr,
+					submPw:subPw
+			 		},
+			dataType: 'json',
+			type: 'post',
+			async:false,//wait for response before doing something
+			success: function(data) 
+				{
+				hideFields();
+				if(data.success==1)
+					{
+					premiumUser=1
+					premiumUserName=subUsr;
+					premiumUserPW=subPw;
+					showLoginDetails()
+					}
+				else
+					{
+					alert(data.theResult)
+					}
+					
+                }
+			});
+
+}
+
+</script>
+
+<div id="login">
+<table><tr><td>
+
+    <div id="loginBtn"><a href="//www.classtools.net" target="_blank">Classtools.net Home</a> | <a href="javascript:showFields()">Premium Login</a> | <a target='_blank' href="https://www.facebook.com/Classtools">Facebook Fanpage</a>
+     | <a target='_blank' href="//www.classtools.net/_SEARCH/index.php">PowerSearch</a>
+      | <a target='_blank' href="//www.classtools.net/fform.php">Contact</a>
+    </div>
+    
+    <div id="loggedIn">
+    </div>
+
+	<div id="loginBox">
+        <div id="loginFields" style="display:none">
+          <table width="10%" border="0" bgcolor="yellow" cellpadding="3px">
+            <tr>
+              <td>Username</td>
+              <td>
+                <input type="text" name="username" id="username"></td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td><input type="password" name="thepw" id="thepw"></td>
+              <td><input type="button" name="button" id="button" value="Submit" onClick="doLoginNow()"></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="small"><a target='_blank' href='http://www.activehistory.co.uk/classtools_premium/index.htm'><span style="color:black">Not a member? Join Now!</span></a></td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+   </div>
+
+</td></tr></table>
+</div>
+<script>
+if(premiumUser==1)
+	{
+	showLoginDetails();
+	hideFields();
+	}
+fbtemplate=0;
+wheel=0;
+wheel=1;
+if(wheel==1)
+	{
+	//$("#loginDiv").hide();
+	$('#login').css({"padding":"0px","margin":"0px","top":"auto","bottom":"0px","background-color":"black"});
+	$('#loginBox').css({"top":"auto","bottom":"40px"});
+	
+	$("#login").show();
+	}
+	
+
+    if(typeof jQuery == 'undefined'){
+        var oScriptElem = document.createElement("script");
+        oScriptElem.type = "text/javascript";
+        oScriptElem.src = "/templates/jquery.js";
+        document.head.insertBefore(oScriptElem, document.head.getElementsByTagName("script")[0])
+    }
+
+</script>
+<div id="container">
+<div id="wrapper" class="clearfix">
+
+<script>
+
+
+	
+  ismsDown = false;
+  prevX = 0;
+  prevY = 0;
+  midX = 250;
+  midY = 250;
+  
+  drawText = true;
+
+  function wheelmsDown(e) {
+  
+	 wheeldiv = document.getElementById("wheelcanvas");
+    midX = wheeldiv.offsetLeft+wheelRadius+wheeldiv.offsetParent.offsetLeft;
+	 midY = wheeldiv.offsetTop+wheelRadius+wheeldiv.offsetParent.offsetTop;
+	 prevX=e.clientX;
+	 prevY=e.clientY;
+    ismsDown = true;
+  }
+  function wheelmsMoving(e) {
+	if (ismsDown == true) {
+	 x = e.clientX+document.documentElement.scrollLeft+document.body.scrollLeft;
+	 y = e.clientY+document.documentElement.scrollTop+document.body.scrollTop;
+	 if (x > midX) {
+		if (y > midY) {
+			startAng += ((prevX-x)-(prevY-y)) *0.01;
+		} else {
+	 	 startAng += (0-(prevX-x)-(prevY-y)) *0.01;
+		}
+	 } else {
+	 	if (y > midY) {
+			startAng += ((prevX-x) + (prevY-y)) *0.01;
+		} else {
+	 	 startAng += (0-(prevX-x) + (prevY-y)) *0.01;
+		}
+	 }
+	 prevX=x;
+	 prevY=y;
+	 drawWheel(false);
+	 }
+  }
+  function wheelmsMoving2(x,y) {
+	if (ismsDown == true) {
+	 if (x > midX) {
+		if (y > midY) {
+			startAng += ((prevX-x)-(prevY-y)) *0.01;
+		} else {
+	 	 startAng += (0-(prevX-x)-(prevY-y)) *0.01;
+		}
+	 } else {
+	 	if (y > midY) {
+			startAng += ((prevX-x) + (prevY-y)) *0.01;
+		} else {
+	 	 startAng += (0-(prevX-x) + (prevY-y)) *0.01;
+		}
+	 }
+	 prevX=x;
+	 prevY=y;
+	 drawWheel(false);
+	 }
+  }
+  function wheelmsUp(e) {
+    ismsDown = false;
+  }
+</script>
+
+
+		<div id="primary" style="z-index:99">
+		  <div id="content" role="main" >
+			
+			<center>
+			
+<canvas onclick="spin();" id="wheelcanvas" onmousedown="wheelmsDown(event);" onmousemove="wheelmsMoving(event);" onmouseup="wheelmsUp(event); spin();" onmouseout="wheelmsUp(event);" width="300" height="300" >
+			    <br/><br/><div style="background:white; padding:15px;"><br/><a href="https://www.classtools.net/wheel">Spin Again</a></div><br/><br/>Your browser cannot display the wheel of choices. Please upgrade to a newer browser that supports HTML5.<br/><br/>
+</canvas>
+
+<audio id="wheelAudio" >
+  <source src="./sounds/wheel.ogg" type="audio/ogg">
+  <source src="./sounds/wheel.mp3" type="audio/mpeg">
+</audio>
+<audio id="clapAudio" >
+  <source src="./sounds/clap.ogg" type="audio/ogg">
+  <source src="./sounds/clap.mp3" type="audio/mpeg">
+</audio>
+
+<script type="text/javascript">
+function playClap() {
+	audio = document.getElementById("clapAudio");
+	audio.play();
+}
+function playSound() {
+	audio = document.getElementById("wheelAudio");
+	audio.play();
+}
+
+wheeldiv = document.getElementById("wheelcanvas");
+
+if (wheeldiv.addEventListener)
+{
+	  wheeldiv.addEventListener('touchmove', function(e) {
+		e.preventDefault();
+		touch = e.touches[0];
+		 wheelmsMoving2(touch.pageX,touch.pageY);
+	}, false);
+	
+		wheeldiv.addEventListener('touchstart', function(e) {
+		e.preventDefault();
+		touch = e.touches[0];
+		 wheelmsDown(touch);
+	}, false);
+	
+	wheeldiv.addEventListener('touchend', function(e) {
+		e.preventDefault();
+		touch = e.touches[0];
+		 wheelmsUp(touch);
+		 spin();
+	}, false);
+} 
+else if (wheeldiv.attachEvent)
+{
+	  wheeldiv.attachEvent('touchmove', function(e) {
+		e.preventDefault();
+		touch = e.touches[0];
+		 wheelmsMoving2(touch.pageX,touch.pageY);
+	}, false);
+	
+	wheeldiv.attachEvent('touchstart', function(e) {
+		e.preventDefault();
+		touch = e.touches[0];
+		 wheelmsDown(touch);
+	}, false);
+	
+	wheeldiv.attachEvent('touchend', function(e) {
+		e.preventDefault();
+		touch = e.touches[0];
+		 wheelmsUp(touch);
+		 spin();
+	}, false);
+}
+
+
+
+
+</script>
+
+
+<div>
+<div id="addwheeldiv" ></div>
+
+</div>
+<br>
+<div id="ops">
+<h2 style="color:white;">Random Name Picker!</h2>
+<h4 style="color:white;"><span class='editit'><a href="javascript:addNames()">Edit/Save</a> | <a target="_blank" href='index.php'>New</a> | <a href="javascript:showEmbedOptions()">Share/Embed</a></span></h4>
+</div>
+<br>
+<script>
+function removAds()
+{$("#ads1").hide()}
+function showAds()
+{
+if(createdByPremiumUser==1 || premiumUserName!=""){return;}
+else{$("#ads1").show()}
+}
+</script>
+<div id="ads1">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Random Name Picker -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-8912794096382956"
+     data-ad-slot="7098309720"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+            </center>
+
+		  </div><!-- #content -->
+		</div><!-- #primary -->
+
+    </div><!-- end of #wrapper -->
+    </div><!-- end of #container -->
+
+
+<div id="wellDoneWrapper">
+<div id="wellDone" style="display:none;border:2px #FFCC66 solid; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;position:absolute;text-align:center;z-index:50;background:#510f11;color:white;padding:20px;">WELL DONE!</div>
+</div>
+<style>
+#textboxWrap a:link, #textboxWrap a:active, #textboxWrap a:visited
+{
+text-decoration:none;border-bottom:1px dotted; 
+color:white;	
+}
+
+#textboxWrap
+{
+	display:none;
+	border:1px black solid;
+	position:absolute;
+	z-index:101;
+	background:#900;
+	color:white;
+	padding:20px;
+	
+}
+#textbox
+{
+	font-size:large;
+	font-family: 'Rye', cursive;
+	width:400px;
+}
+</style>
+
+<div id="wrape">
+<div id="textboxWrap">
+<form name="test" id="test">
+    <textarea rows="20" name="textbox" id="textbox">test</textarea>
+  <br>
+    <input type="button" name="but" id="but" value="Submit" onClick="javascript:createNames()">
+    <input type="button" name="but" id="but" value="Save this list as currently shown" onClick="javascript:createNames();save()">
+    <input type="button" name="but2" id="but2" value="Cancel" onClick="javascript:$('#textboxWrap').hide();toggle(500);addingNames=0;">
+    <br>
+    <a href='javascript:fullList()'>Show full list</a> | <a href='javascript:editedList()'>Show remaining entries</a>
+  </form>
+</div>
+</div>
+
+
+<script>
+
+function fullList()
+{
+document.test.textbox.value="";
+	for(n=0;n<origentries.length;n++)
+		{
+		if(origentries[n]!=""){document.test.textbox.value+=origentries[n]+"\n"}	
+		}	
+}
+
+function editedList()
+{
+document.test.textbox.value="";
+	for(n=0;n<entries.length;n++)
+		{
+		if(entries[n]!=""){document.test.textbox.value+=entries[n]+"\n"}	
+		}	
+}
+
+
+
+
+<!-- START OF EMBED OPTIONS -->
+function showEmbedOptions()
+{
+if(spinning==1){return}
+temp=self.location+"";
+if(temp.indexOf("_")==-1)	//homepage.
+	{
+		//Needs to be saved.
+		apprise("<b>You need to save your work before you can get the embed code.</b>");
+		return;
+	}
+apprise(document.getElementById("shareDivOptions").innerHTML);
+}
+
+function popup(s)
+{
+$('.appriseOverlay').remove();$('.appriseOuter').remove()
+if(s=="QR")
+	{
+	apprise("<img src='https://chart.apis.google.com/chart?chs=250x250&amp;cht=qr&amp;chl=https%3A%2F%2Fwww.classtools.net%2Frandom-name-picker%2F14_3aCcBD&amp;choe=UTF-8' alt='QR' />");
+	}
+if(s=="widget")
+	{
+	apprise('<b>URL</b>: https://www.classtools.net/random-name-picker/14_3aCcBD<p><b>Embed Code</b>:<br><textarea rows="10" cols="40"><iframe src="https://www.classtools.net/random-name-picker/14_3aCcBD" style="position:relative;top:0;left:0;width:675px;height:600px;overflow:none;border:none"></iframe></textarea>');
+	}
+}
+</script>
+<div style="display:none" id="shareDivOptions">
+    <ul>
+    <li><a href="javascript:popup('widget')">URL Link / Embed Code</a></li>
+    <li><a href="javascript:popup('QR')">QR Code</a></li>
+    <li><a href="./download.php?fol=14&amp;fil=3aCcBD">Download Web Shortcut</a></li>
+    
+    </ul>
+</div>
+<div id="preloadQR" style="display:none"><img src='https://chart.apis.google.com/chart?chs=250x250&amp;cht=qr&amp;chl=https%3A%2F%2Fwww.classtools.net%2Frandom-name-picker%2F14_3aCcBD&amp;choe=UTF-8' alt='QR' /></div>
+
+<!-- END OF EMBED OPTIONS -->
+
+
+
+<form name="reloader" id="reloader" method="POST">
+<input type="hidden" name="pw" id="pw" value="" />
+</form>
+<div id="aud">
+<img id="theAud" style="display:none" src="./images/aud.png" />
+</div>
+
+<div id="logo" style="position:absolute;top:10px;right:10px;z-index:999">
+<a href="https://www.classtools.net">
+<img src="https://www.classtools.net/classtools_premium/logo_mini.gif">
+</a>
+</div>
+
+<div id="logo2" style="position:absolute;top:10px;left:10px;z-index:999;background-color:white">
+
+</div>
+<style>
+
+#aud{
+position:absolute;
+width:100%;
+bottom:-500px;
+z-index:101;
+}
+#ops{
+position:relative;
+z-index:11;
+}
+#aud img{
+width:100%;
+}
+</style>
+
+</body>
+</html>
